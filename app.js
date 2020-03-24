@@ -54,10 +54,8 @@ function donnees(){
   * Cette liste sera contenu dans la clé communication
   */
 function comms(){
-    
     return {"communication":data.communication};
 }
-
 
  /**
   * Cette fonction est exécutée lorsqu'on demande l'adresse
@@ -68,7 +66,7 @@ function comms(){
   * Cette liste sera contenue dans la clé objects
   */
 function objects(){
-    return {"objects":[]};
+    return {"objects":data.objects};
 }
 
  /**
@@ -80,7 +78,13 @@ function objects(){
   * Cette liste sera contenu dans la clé types
   */
 function types(){
-    return undefined;
+    var types = data.types;
+    var array = [];
+    for (var type in types){
+        array.push(types[type]);
+    }
+    console.log(array);
+    return {"types":array};
 }
 
 /**
@@ -92,7 +96,13 @@ function types(){
  * Cette liste sera contenu dans la clé formats.
  */
 function formats(){
-   return undefined;
+    var formats = data.data_formats;
+    var undefined = [];
+    for (var format in formats){
+        undefined.push(formats[format]);
+    }
+    console.log(undefined);
+    return {"formats":undefined};
 }
 
  /**
