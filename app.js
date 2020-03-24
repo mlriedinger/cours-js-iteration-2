@@ -97,12 +97,12 @@ function types(){
  */
 function formats(){
     var formats = data.data_formats;
-    var undefined = [];
+    var result = [];
     for (var format in formats){
-        undefined.push(formats[format]);
+        result.push(formats[format]);
     }
-    console.log(undefined);
-    return {"formats":undefined};
+    console.log(result);
+    return {"formats":result};
 }
 
  /**

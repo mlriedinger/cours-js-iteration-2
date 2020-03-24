@@ -97,7 +97,7 @@ test('la fonction formats retourne un objet json contenant une liste des formats
     assert.equal(typeof d, 'object');
     assert.equal(Object.keys(d).length,1);
     assert.equal(Object.keys(d)[0],'formats');
-    assert.equal(typeof d.types[0], 'object');
+    assert.equal(typeof d.formats[0], 'object');
     assert.equal(d.formats.length, 12);
 });
 
