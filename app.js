@@ -42,10 +42,7 @@ function home(){
   * Elle retourne un objet javascript contenant toutes les données.
   */
 function donnees(){
-    return {
-        data1 : 1,
-        data2 : 2,
-    };
+    return data;
 }
 
  /**
