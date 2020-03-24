@@ -54,7 +54,8 @@ function donnees(){
   * Cette liste sera contenu dans la clé communication
   */
 function comms(){
-    return {"communication":[]};
+    
+    return {"communication":data.communication};
 }
 
 

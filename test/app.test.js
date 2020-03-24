@@ -42,7 +42,7 @@ test('la fonction comms retourne un objet json contenant une liste des modes de 
     assert.notEqual(d, undefined);
     assert.equal(typeof d, 'object')
     assert.equal(d.communication.length, 2);
-    assert.equal(d.communication, ['wifi', 'lorawan']);
+    assert.deepEqual(d.communication, ['wifi', 'lorawan']);
 });
 
 
