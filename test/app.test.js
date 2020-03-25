@@ -77,11 +77,11 @@ test('objects renvoie la liste des objets dans un objet json',()=>{
         "image":"raspberry-pi-4.jpg",
         "description":"Capteur de température et d'humidité de la salle de cours du Campus de Valence",
         "location":"44.932990, 4.890915",
-        "refresh":5,"status":true,"provisionning":{"date":"2020-03-20","operator":"JPA"}},{"serial":"OBJ_004","type":"raspberry_TH","image":"raspberry-pi-4.jpg","description":"Capteur de température et d'humidité de la salle de cours du Campus d'Annecy","location":"45.907998, 6.102729","refresh":5,"status":true,"provisionning":{"date":"2020-03-20","operator":"JPA"}},{"serial":"OBJ_005","type":"raspberry_AQ","image":"raspberry-pi-4.jpg","description":"Capteur de qualité de l'air de la salle de cours du Campus de Chambéry","location":"45.644065, 5.867810","refresh":5,"status":true,"provisionning":{"date":"2020-03-20","operator":"JPA"}},{"serial":"OBJ_006","type":"raspberry_AQ","image":"raspberry-pi-4.jpg","description":"Capteur de qualité de l'air de la salle de cours du Campus de Grenoble","location":"45.185679, 5.727761","refresh":5,"status":true,"provisionning":{"date":"2020-03-20","operator":"JPA"}},{"serial":"OBJ_007","type":"raspberry_AQ","image":"raspberry-pi-4.jpg","description":"Capteur de qualité de l'air de la salle de cours du Campus de Valence","location":"44.932990, 4.890915","refresh":5,"status":true,"provisionning":{"date":"2020-03-20","operator":"JPA"}},{"serial":"OBJ_008","type":"raspberry_AQ","image":"raspberry-pi-4.jpg","description":"Capteur de qualité de l'air de la salle de cours du Campus d'Annecy","location":"45.907998, 6.102729","refresh":5,"status":true,"provisionning":{"date":"2020-03-20","operator":"JPA"}},{"serial":"OBJ_009","type":"Digital_C02","description":"Capteur de mesure du C02 de la salle de cours du Campus de Chambéry","location":"45.644065, 5.867810","refresh":60,"status":true,"provisionning":{"date":"2020-03-20","operator":"JPA"}},{"serial":"OBJ_010","type":"arduino_acc","image":"arduino_door.jpg","description":"Capteur d'ouverture porte de la salle de cours du Campus de Chambéry","location":"45.644065, 5.867810","refresh":0,"status":true,"provisionning":{"date":"2020-03-20","operator":"JPA"}},{"serial":"OBJ_011","type":"arduino_presence","image":"arduino_presence.jpg","description":"Capteur de présence de la salle de cours du Campus de Chambéry","location":"45.644065, 5.867810","refresh":0,"status":false,"provisionning":{"date":"2020-03-20","operator":"JPA"}}
+        "refresh":5,"status":true,"provisionning":{"date":"2020-03-20","operator":"JPA"}},{"serial":"OBJ_004","type":"raspberry_TH","image":"raspberry-pi-4.jpg","description":"Capteur de température et d'humidité de la salle de cours du Campus d'Annecy","location":"45.907998, 6.102729","refresh":5,"status":true,"provisionning":{"date":"2020-03-20","operator":"JPA"}},{"serial":"OBJ_005","type":"raspberry_AQ","image":"raspberry-pi-4.jpg","description":"Capteur de qualité de l'air de la salle de cours du Campus de Chambéry","location":"45.644065, 5.867810","refresh":5,"status":true,"provisionning":{"date":"2020-03-20","operator":"JPA"}},{"serial":"OBJ_006","type":"raspberry_AQ","image":"raspberry-pi-4.jpg","description":"Capteur de qualité de l'air de la salle de cours du Campus de Grenoble","location":"45.185679, 5.727761","refresh":5,"status":true,"provisionning":{"date":"2020-03-20","operator":"JPA"}},{"serial":"OBJ_007","type":"raspberry_AQ","image":"raspberry-pi-4.jpg","description":"Capteur de qualité de l'air de la salle de cours du Campus de Valence","location":"44.932990, 4.890915","refresh":5,"status":true,"provisionning":{"date":"2020-03-20","operator":"JPA"}},{"serial":"OBJ_008","type":"raspberry_AQ","image":"raspberry-pi-4.jpg","description":"Capteur de qualité de l'air de la salle de cours du Campus d'Annecy","location":"45.907998, 6.102729","refresh":5,"status":true,"provisionning":{"date":"2020-03-20","operator":"JPA"}},{"serial":"OBJ_009","type":"Digital_CO2","description":"Capteur de mesure du CO2 de la salle de cours du Campus de Chambéry","location":"45.644065, 5.867810","refresh":60,"status":true,"provisionning":{"date":"2020-03-20","operator":"JPA"}},{"serial":"OBJ_010","type":"arduino_acc","image":"arduino_door.jpg","description":"Capteur d'ouverture porte de la salle de cours du Campus de Chambéry","location":"45.644065, 5.867810","refresh":0,"status":true,"provisionning":{"date":"2020-03-20","operator":"JPA"}},{"serial":"OBJ_011","type":"arduino_presence","image":"arduino_presence.jpg","description":"Capteur de présence de la salle de cours du Campus de Chambéry","location":"45.644065, 5.867810","refresh":0,"status":false,"provisionning":{"date":"2020-03-20","operator":"JPA"}}
     ]});
 });
 
-test('la fonction types retourne un objet json contenant une liste des types existants dans la clé \'type\'', ()=>{
+test('la fonction types retourne un objet json contenant une liste des types existants dans la clé \'types\'', ()=>{
     const d = app.types();
     assert.notEqual(d, undefined);
     assert.equal(typeof d, 'object')
@@ -178,28 +178,28 @@ test("la fonction filter_objects_by_comm retourne la liste d'objets demandée",(
 test("la fonction filter_objects_by_data_type retourne la liste d'objets demandée",()=>{
     const f = app.filter_objects_by_data_type;
     assert.equal(f("typenull"), undefined);
-    assert.notEqual(f("string"), undefined);
-    assert.equal(f("number"), 'object');
-    assert.equal(f("boolean"), 'object');
+    assert.notEqual(f("boolean"), undefined);
+    assert.equal(typeof f("number"), 'object');
+    assert.equal(typeof f("boolean"), 'object');
     assert.equal(Object.keys(f("number")).length, 1);
     assert.equal(Object.keys(f("boolean")).length, 1);
     assert.equal(Object.keys(f("number"))[0], "objects");
     assert.equal(Object.keys(f("boolean"))[0], "objects");
-    assert.equal(Object.keys(f("number").objects).length,9);
-    assert.equal(Object.keys(f("boolean").objects).length,9);
-    assert.notEqual(Object.keys(f("boolean").objects).indexOf("sensors"),-1);
-    assert.notEqual(Object.keys(f("number").objects).indexOf("sensors"),-1);
+    assert.equal(Object.keys(f("number").objects).length,11);
+    assert.equal(Object.keys(f("boolean").objects).length,1);
+    assert.notEqual(Object.keys(f("boolean").objects[0]).indexOf("sensors"),-1);
+    assert.notEqual(Object.keys(f("number").objects[0]).indexOf("sensors"),-1);
 });
 
-test('la fonction get_full_object_by_serial renvoie l\'objet et tout ses détails',()=>{
+test('la fonction get_full_object_by_serial renvoie l\'objet et tous ses détails',()=>{
     const f = app.get_full_object_by_serial;
     assert.equal(f("12345"), undefined);
-    assert.equal(typeof (f("OBJ_009")), 'object' );
-    assert.equal(Object.keys(f("OBJ_04"))[0], "objects");
-    assert.notEqual(Object.keys(f("OBJ_008").objects).indexOf("sensors"),-1);
-    assert.notEqual(Object.keys(f("OBJ_011").objects.sensors[0]).indexOf("data_unit"),-1);
-    assert.notEqual(Object.keys(f("OBJ_003").objects.sensors[0]).indexOf("data_type"),-1);
-    assert.notEqual(Object.keys(f("OBJ_007").objects).indexOf("communication"),-1);
-    assert.notEqual(Object.keys(f("OBJ_007").objects).indexOf("default_image"),-1);
-    assert.equal(f("OBJ_009").object.description,"Capteur de mesure du CO2 de la salle de cours du Campus de Chambéry");
+    assert.equal(typeof f("OBJ_009"), 'object');
+    assert.equal(f("OBJ_004").hasOwnProperty("serial"), true);
+    assert.notEqual(Object.keys(f("OBJ_008")).indexOf("sensors"),-1);
+    assert.notEqual(Object.keys(f("OBJ_011").sensors['distance']).indexOf("unit"),-1);
+    assert.notEqual(Object.keys(f("OBJ_003").sensors['humidity']).indexOf("data_type"),-1);
+    assert.notEqual(Object.keys(f("OBJ_007")).indexOf("communication"),-1);
+    assert.notEqual(Object.keys(f("OBJ_007")).indexOf("default_image"),-1);
+    assert.equal(f("OBJ_009").description,"Capteur de mesure du CO2 de la salle de cours du Campus de Chambéry");
 });
