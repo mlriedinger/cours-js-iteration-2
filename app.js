@@ -214,12 +214,19 @@ function get_types_by_format(format){
  * ayant pour mode de communication celui passé en paramètre.
  */
 function filter_objects_by_comm(comm){
-    let objects = data.types;
-    let result =[];
-    for (let i in objects){
-        if(objects[i].communication === comm){
-            result.push(objects[i]); 
-        }
+    let types = data.types;
+    let objects = data.objects;
+    let result = [];
+       
+    for (let key1 in types){        // On parcourt l'objet "types"    
+
+       if (types[key1].communication == comm){      // Si la valeur renvoyée par l'attribut "communication" est égale au paramètre passé
+           for ( let key2 in objects){              // Alors, pour chaque occurence de l'obejt "objects"
+               if (objects[key2].type === key1){    // Si, la valeur renvoyée par l'attribut "type" (objet "objects") est égale à la valeur renvoyée par l'attribut "communication" (objet "types")
+                   result.push(types[key2]);        
+               }
+           }
+       }
     }
     if (result.length === 0) return undefined;
     console.log(result);
