@@ -168,6 +168,13 @@
     <script src="./static/js/objects.js"></script>
     <script>
         load_components();  // Solution 2 pour appeler la fonction load_components()
+
+        if(window.addEventListener){        // Solution 3 pour appeler la fonction load_components()
+            window.addEventListener('load', load_components, false);
+            }
+            else{
+            window.attachEvent('onload', load_components);
+            }
     </script>
 </body>
 
