@@ -19,7 +19,7 @@
 
     </head>
 
-<body onload="load_components()">     <!-- Solution 4 pour appeler la fonction load_components()-->  
+<body">     <!-- Solution 4 pour appeler la fonction load_components() : onload ="load_components()" -->  
     <div class="wrapper" id="wrapper">
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light" id="nav">
@@ -168,7 +168,7 @@
     -->
     <script src="./static/js/objects.js"></script>
     <script>
-        load_components();  // Solution 2 pour appeler la fonction load_components()
+        // load_components();  // Solution 2 pour appeler la fonction load_components()
 
         if(window.addEventListener){        // Solution 3 pour appeler la fonction load_components()
             window.addEventListener('load', load_components, false);

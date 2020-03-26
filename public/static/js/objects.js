@@ -7,11 +7,14 @@
  */
 function load_components(){
     console.log("Chargement des données de la page");
+    $.get('http://localhost:5000/objects', function(data){
+       console.log(data);
+    })
     // Ajouter ici le code permettant de charger dynamiquement les éléments de la page
 }
 
 
 // Solution 1 pour appeler la fonction load_components()
 
-load_components();
+// load_components();
 
