@@ -8,7 +8,9 @@
 function load_components(){
     console.log("Chargement des données de la page");
     $.get('http://localhost:5000/objects', function(data){
-       console.log(data);
+        for (let element of data.objects){
+            add_line_to_table(element);
+        }
     })
     // Ajouter ici le code permettant de charger dynamiquement les éléments de la page
 }
