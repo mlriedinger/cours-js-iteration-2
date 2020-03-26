@@ -22,3 +22,11 @@
 .main-sidebar{
     background-color: rgba(0, 102, 102, 0.9);
 }
+
+img{
+    width:100px;
+}
+
+.check{
+    border: 1px solid black;
+}

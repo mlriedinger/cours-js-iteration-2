@@ -13,8 +13,33 @@ function load_components(){
     // Ajouter ici le code permettant de charger dynamiquement les éléments de la page
 }
 
-
 // Solution 1 pour appeler la fonction load_components()
 
 // load_components();
 
+function add_line_to_table(data){
+    let line =  '<tr>\
+                    <td>' + data.serial + '</td>\
+                    <td><img src="./static/images/' + data.image + '"/></td>\
+                    <td>' + data.description + '</td>\
+                    <td><input type="checkbox"></td>\
+                    <td><input type="button" class="btn btn-dark" value="Détails"></td>\
+                </tr>';
+
+    document.getElementById("table_body").innerHTML += line;
+    console.log('L\'élément a été ajouté.');
+}
+
+let object_data = {
+    "serial": "OBJ_001",
+    "type": "raspberry_TH",
+    "image": "raspberry-pi-4.jpg",
+    "description": "Capteur de température et d'humidité de la salle de cours du Campus de Chambéry",
+    "location": "45.644065, 5.867810",
+    "refresh": 5,
+    "status": true,
+    "provisionning":{
+        "date": "2020-03-20",
+        "operator": "JPA"
+        }
+   }
