@@ -10,3 +10,8 @@ function load_components(){
     // Ajouter ici le code permettant de charger dynamiquement les éléments de la page
 }
 
+
+// Solution 1 pour appeler la fonction load_components()
+
+load_components();
+
