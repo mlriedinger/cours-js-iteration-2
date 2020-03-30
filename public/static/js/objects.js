@@ -104,47 +104,48 @@ function load_default_image(type, serial){
 
 function update_modale(serial){
     $.get('/data', function(data){
-        for (let element in data.objects){
+        for (let key in data.objects){
             // console.log(data.objects[element].serial);
 
-            if (data.objects[element].serial == serial){
-                $('#serialNumber').append(data.objects[element].serial);
+            if (data.objects[key].serial == serial){                            // Si le n° de série correspond
+                $('#serialNumber').append(data.objects[key].serial);            // On affiche le n° de série
                 // console.log($('#serialNumber').append(data.objects[element].serial));
                 // console.log($('#serialNumber').text());
-                $('#type').append(data.objects[element].type);
-                $('#status').append(data.objects[element].status);
-                $('#image').attr('src', '/static/images/'+ data.objects[element].image);
+                $('#type').append(data.objects[key].type);                      // On affiche le type
+                $('#status').append(data.objects[key].status);                  // On affiche le statut
+                $('#image').attr('src', '/static/images/'+ data.objects[key].image);        // On affiche l'image de l'objet - il manque l'image par défaut !
             
-                for (let i in data.types){
+                for (let key2 in data.types){
                     
-                    if (data.objects[element].type == i){
+                if (data.objects[key].type == key2){                            // Si le type correspond
                         
-                        for (let j in data.types[i].sensors){
-                            console.log(data.types[i].sensors[j]);
-                            let line = `
-                            <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title" id="sensor">Capteur : ${data.types[i].sensors[j]} </h5>
-                                            </div>
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item" id="sensor_data_type">Type : </li>
-                                                <li class="list-group-item" id="sensor_unit">Unité : </li>
-                                            </ul>
-                                        </div>
-                            `
-                            $('.col-4:nth-child(2)').append(line);
+                        for (let key3 in data.types[key2].sensors){             // Pour chaque sensor de l'objet
+                            // console.log(data.types[key2].sensors[key3]);
+                            let lineSensor = `
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="sensor">Capteur : ${data.types[key2].sensors[key3]} </h5>
+                                    </div>
+                                            
+                                </div>`;
+                            $('.col-4:nth-child(2)').append(lineSensor);        // On ajoute une ligne pour chaque sensor
+                        
+                        for (let key4 in data.data_formats){                    
                             
-                        
-
-
-
-                    }
-                    
-                    }
-                    
+                            if (data.types[key2].sensors[key3] == key4){        // Si le sensor correspond
+                                // console.log(data.data_formats[key4].data_type);
+                                // console.log(data.data_formats[key4].unit);
+                                let lineType = `                                
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item" id="type">Type : ${data.data_formats[key4].data_type} </li>
+                                        <li class="list-group-item" id="unit">Unit : ${data.data_formats[key4].unit} </li>
+                                    </ul>`;
+                                $('.col-4:nth-child(2)').append(lineType);      // On ajoute une ligne data_type et unit pour chaque sensor
+                            }
+                        }                
+                        }
+                    } 
                 }
-                                
-
             };
         };
         // console.log(data);
