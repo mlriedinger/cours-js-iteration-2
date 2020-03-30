@@ -20,14 +20,14 @@ function load_components(){
 
 function add_line_to_table(data){
     let image;
-    if (data.image == undefined){
+    if (data.image == undefined){                           // Si l'objet n'a pas d'image
         // console.log(data.type);
-        load_default_image(data.type, data.serial);
+        load_default_image(data.type, data.serial);         // Alors, on appelle la fonction qui charge l'image par défaut, qui prend en paramètre le type et le n° de série
         // console.log(load_default_image(data.type));
     }
-    else image = data.image;
+    else image = data.image;                                // Sinon, on charge l'image
 
-    let line =  '<tr>\
+    let line =  '<tr class="table_row">\
                     <td>' + data.serial + '</td>\
                     <td><img src="./static/images/' + image + '"/></td>\
                     <td>' + data.description + '</td>\
@@ -58,19 +58,33 @@ function load_default_image(type, serial){
     $.get('http://localhost:5000/data', function(data){
       
     let image;
-        for (let element in data.types){
-            if (element == type){
+        for (let element in data.types){                           // Pour chaque objet de data.types
+            if (element == type){                                  // Si l'objet correspond au type passé en paramètre
                 // console.log(data.types[element].default_image);
-                image = data.types[element].default_image;
+                image = data.types[element].default_image;          // On charge l'image par défaut dans image
+                // Solution en jQuery
+
                 // console.log(image);
-                $('td:contains('+serial+')').next().children().attr('src', '/static/images/'+image);
-                console.log('Data Serial :' + serial);
-                console.log('Data image :' + image);
+                // console.log('Data Serial :' + serial);
+                // console.log('Data image :' + image);
                 // console.log(document.getElementsByTagName(`td:contains(${data.objects.serial})`));
+                
+                // $('td:contains('+serial+')').next().children().attr('src', '/static/images/'+image);
+                
+
+                // Solution en vanilla
+                let getTableRow = document.getElementById('table_body').children;       // On cible tous les tr du tableau 
+                // console.log(getTd);
+                for (let i = 0 ; i < (getTableRow.length - 1); i++){                    // On parcourt le tableau
+                    // console.log(getTableRow[i].children[0].textContent);
+                    if (getTableRow[i].children[0].textContent == serial){              // Si le texte de la 1ère ligne correspond au n° de série en paramètre
+                        getTableRow[i].children[1].innerHTML='<img src="./static/images/' + image + '"/>';      // Alors on remplace l'image undefined par l'image par défaut
+                    }
+                }
                 return image;
             }
         }   
     });
 }
 
-// load_default_image('Digital_CO2');
+// load_default_image('Digital_CO2');       // Test
