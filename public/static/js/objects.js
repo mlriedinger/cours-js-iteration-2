@@ -6,8 +6,8 @@
  *    - charger les données des objets dans la table
  */
 function load_components(){
-    console.log("Chargement des données de la page");
-    $.get('http://localhost:5000/objects', function(data){
+    // console.log("Chargement des données de la page");
+    $.get('/objects', function(data){
         for (let element of data.objects){
             // console.log(element);
             add_line_to_table(element);
@@ -31,11 +31,22 @@ function add_line_to_table(data){
                     <td>' + data.serial + '</td>\
                     <td><img src="./static/images/' + image + '"/></td>\
                     <td>' + data.description + '</td>\
-                    <td><input type="checkbox"></td>\
-                    <td><input type="button" class="btn btn-dark" value="Détails"></td>\
+                    <td>\
+                        <div class="form-check">\
+                            <input class="form-check-input" type="checkbox" checked/>\
+                        </div>\
+                    </td>\
+                    <td>\
+                        <div class="content" id="content_div">\
+                            <input type="button" class="btn btn-dark" value="Détails" data-toggle="modal" data-target="#modal-details">\
+                        </div>\
+                    </td>\
                 </tr>';
 
-    document.getElementById("table_body").innerHTML += line;
+    // document.getElementById("table_body").innerHTML += line;
+    $("#table_body").append(line);                       // Solution jQuery
+
+
     console.log('L\'élément a été ajouté.');
 }
 
@@ -55,7 +66,7 @@ let object_data = {
    
 function load_default_image(type, serial){
     
-    $.get('http://localhost:5000/data', function(data){
+    $.get('/data', function(data){
       
     let image;
         for (let element in data.types){                           // Pour chaque objet de data.types
@@ -75,8 +86,10 @@ function load_default_image(type, serial){
                 // Solution en vanilla
                 let getTableRow = document.getElementById('table_body').children;       // On cible tous les tr du tableau 
                 // console.log(getTd);
+
                 for (let i = 0 ; i < (getTableRow.length - 1); i++){                    // On parcourt le tableau
                     // console.log(getTableRow[i].children[0].textContent);
+
                     if (getTableRow[i].children[0].textContent == serial){              // Si le texte de la 1ère ligne correspond au n° de série en paramètre
                         getTableRow[i].children[1].innerHTML='<img src="./static/images/' + image + '"/>';      // Alors on remplace l'image undefined par l'image par défaut
                     }
@@ -88,3 +101,61 @@ function load_default_image(type, serial){
 }
 
 // load_default_image('Digital_CO2');       // Test
+
+function update_modale(serial){
+    $.get('/data', function(data){
+        for (let element in data.objects){
+            // console.log(data.objects[element].serial);
+
+            if (data.objects[element].serial == serial){
+                $('#serialNumber').append(data.objects[element].serial);
+                // console.log($('#serialNumber').append(data.objects[element].serial));
+                // console.log($('#serialNumber').text());
+                $('#type').append(data.objects[element].type);
+                $('#status').append(data.objects[element].status);
+                $('#image').attr('src', '/static/images/'+ data.objects[element].image);
+            
+                for (let i in data.types){
+                    
+                    if (data.objects[element].type == i){
+                        
+                        for (let j in data.types[i].sensors){
+                            console.log(data.types[i].sensors[j]);
+                            let line = `
+                            <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title" id="sensor">Capteur : ${data.types[i].sensors[j]} </h5>
+                                            </div>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item" id="sensor_data_type">Type : </li>
+                                                <li class="list-group-item" id="sensor_unit">Unité : </li>
+                                            </ul>
+                                        </div>
+                            `
+                            $('.col-4:nth-child(2)').append(line);
+                            
+                        
+
+
+
+                    }
+                    
+                    }
+                    
+                }
+                                
+
+            };
+        };
+        // console.log(data);
+    });
+}
+
+update_modale('OBJ_001');
+
+
+
+$('.btn-dark').on('click', function(){
+    console.log($('.table_row td:first').text='test');
+
+})
