@@ -104,15 +104,17 @@ function load_default_image(type, serial){
 
 function update_modale(serial){
     $.get('/data', function(data){
+        $('.col-4:nth-child(2)').html('');
+
         for (let key in data.objects){
             // console.log(data.objects[element].serial);
 
             if (data.objects[key].serial == serial){                            // Si le n° de série correspond
-                $('#serialNumber').append(data.objects[key].serial);            // On affiche le n° de série
+                $('#serialNumber').html(`N° de série : ${data.objects[key].serial}`);            // On affiche le n° de série
                 // console.log($('#serialNumber').append(data.objects[element].serial));
                 // console.log($('#serialNumber').text());
-                $('#type').append(data.objects[key].type);                      // On affiche le type
-                $('#status').append(data.objects[key].status);                  // On affiche le statut
+                $('#type').html(`Type : ${data.objects[key].type}`);                      // On affiche le type
+                $('#status').html(`Statut : ${data.objects[key].status}`);                  // On affiche le statut
                 $('#image').attr('src', '/static/images/'+ data.objects[key].image);        // On affiche l'image de l'objet - il manque l'image par défaut !
             
                 for (let key2 in data.types){
@@ -152,12 +154,13 @@ function update_modale(serial){
     });
 }
 
-function test_update_modale(serial){
-    update_modale(serial);
-}
+// function test_update_modale(serial){
+//     update_modale(serial);
+// }
 
-test_update_modale('OBJ_004');
+// test_update_modale('OBJ_004');
 
 function load_modale(button){
     console.log(button);
+    update_modale(button);
 }
