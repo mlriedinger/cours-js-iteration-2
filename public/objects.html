@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="/static/adminlte/dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin=""/>
     <link rel="stylesheet" href="./static/style.css">
 
     </head>
@@ -132,10 +135,10 @@
                                         <h4>Informations</h4>
                                         <div class="card">
                                             <ul class="list-group list-group-flush">
-                                              <li class="list-group-item" id="serialNumber">N° de série : </li>
-                                              <li class="list-group-item" id="type">Type : </li>
+                                              <li class="list-group-item" id="serialNumber"></li>
+                                              <li class="list-group-item" id="type"></li>
                                               <img class="card-img-top" src="" alt="Card image cap" id="image">
-                                              <li class="list-group-item" id="status">Statut : </li>
+                                              <li class="list-group-item" id="status"></li>
                                             </ul>
                                           </div>
                                     </div>
@@ -145,7 +148,7 @@
                                     </div>
                                     <div class="col-4">
                                         <h4>Localisation</h4>
-                                            <div>
+                                            <div id="mapId">
                                                 
                                             </div>
                                     </div>
@@ -205,6 +208,11 @@
 
         // add_line_to_table(object_data);
     </script>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+
+    
 </body>
 
 

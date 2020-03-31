@@ -27,3 +27,7 @@ img{
     width:100px;
 }
 
+#mapId { 
+    height: 100%; 
+    width: 100%;
+}
