@@ -38,7 +38,7 @@ function add_line_to_table(data){
                     </td>\
                     <td>\
                         <div class="content" id="content_div">\
-                            <input type="button" class="btn btn-dark" value="Détails" data-toggle="modal" data-target="#modal-details">\
+                            <input type="button" class="btn btn-dark" value="Détails" data-toggle="modal" data-target="#modal-details" onClick="load_modale(this.parentElement.parentElement.parentElement.children[0].innerText)">\
                         </div>\
                     </td>\
                 </tr>';
@@ -152,11 +152,12 @@ function update_modale(serial){
     });
 }
 
-update_modale('OBJ_001');
+function test_update_modale(serial){
+    update_modale(serial);
+}
 
+test_update_modale('OBJ_004');
 
-
-$('.btn-dark').on('click', function(){
-    console.log($('.table_row td:first').text='test');
-
-})
+function load_modale(button){
+    console.log(button);
+}
